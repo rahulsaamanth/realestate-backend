@@ -1,6 +1,6 @@
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://realestate-details.netlify.app/",
+  "https://realestate-details.netlify.app",
 ]
 
 const corsOptions = {

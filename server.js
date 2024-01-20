@@ -4,15 +4,14 @@ const bodyParser = require("body-parser")
 const twilio = require("twilio")
 const cors = require("cors")
 const corsOptions = require("./corsOptions")
-// const helmet = require("helmet")
+const helmet = require("helmet")
 
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
-// app.use(cors())
-// app.use(helmet())
+app.use(helmet())
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN
