@@ -9,7 +9,12 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app.use(bodyParser.json())
-app.use(cors({ origin: "http://localhost:5173", optionsSuccessStatus: 200 }))
+app.use(
+  cors({
+    origin: "https://realestate-details.netlify.app/",
+    optionsSuccessStatus: 200,
+  })
+)
 // app.use(cors())
 app.use(helmet())
 
