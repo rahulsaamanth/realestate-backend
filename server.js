@@ -19,7 +19,7 @@ const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER
 
 const client = new twilio.Twilio(accountSid, authToken)
 
-app.post("/send-sms", async (req, res) => {
+app.post("/send-sms-channel-partner", async (req, res) => {
   const { to, body } = req.body
 
   try {
@@ -29,7 +29,29 @@ app.post("/send-sms", async (req, res) => {
       to,
     })
     console.log("SMS sent:", message.sid)
-    res.json({ success: true, message: "SMS sent successfully!" })
+    res.json({
+      success: true,
+      message: "SMS sent to channel partner successfully!",
+    })
+  } catch (error) {
+    console.error("Error sending SMS", error.message)
+    res.status(500).json({ success: false, message: "Failed to send SMS." })
+  }
+})
+app.post("/send-sms-sales-person", async (req, res) => {
+  const { to, body } = req.body
+
+  try {
+    const message = await client.messages.create({
+      body,
+      from: twilioPhoneNumber,
+      to,
+    })
+    console.log("SMS sent:", message.sid)
+    res.json({
+      success: true,
+      message: "SMS sent to sales person successfully!",
+    })
   } catch (error) {
     console.error("Error sending SMS", error.message)
     res.status(500).json({ success: false, message: "Failed to send SMS." })
